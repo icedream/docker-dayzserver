@@ -1,0 +1,6 @@
+_CommonRedist/
+mpmissions/*/storage_*
+log/
+Dockerfile*
+.docker*
+*.cfg
