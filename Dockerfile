@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM jlesage/baseimage-gui:debian-9
 
 # wine
 ADD https://dl.winehq.org/wine-builds/Release.key /wine-builds.key
@@ -14,19 +14,16 @@ RUN \
 	&& dpkg --add-architecture i386 \
 	&& echo "deb https://dl.winehq.org/wine-builds/debian/ stretch main" >> /etc/apt/sources.list.d/wine.list \
 	&& apt-get -y update \
-	&& apt-get -y install --install-recommends bash winehq-stable xserver-xorg-video-dummy \
-	&& apt-get clean
+	&& add-pkg winehq-stable procps
 
-WORKDIR /opt/dayzserver/
-COPY . .
+COPY . /opt/dayzserver/
 
-COPY docker/xorg.conf /etc/X11/xorg.conf
-COPY docker/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# RUN useradd -k /var/empty -G tty -m -N -r dayzserver
 
-RUN useradd -k /var/empty -G tty -m -N -r dayzserver
-USER dayzserver
+COPY docker/rootfs/ /
+ADD https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 /usr/local/bin/gosu
+RUN chmod -v a+x /usr/local/bin/* /*.sh
+RUN mv -v /opt/dayzserver/mpmissions /opt/dayzserver/mpmissions.template && ln -s /config/mpmissions /opt/dayzserver/mpmissions
+ENV APP_NAME="DayZ Server"
+WORKDIR /config
 
-RUN wineboot
-
-CMD ["/entrypoint.sh"]
