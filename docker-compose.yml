@@ -1,0 +1,22 @@
+version: "3.6"
+
+services:
+    server:
+        image: docker.dreamnetwork.oss:5000/icedream/dayzserver
+        build: .
+        ports:
+            - 2302:2302/udp #game
+            - 2303:2303/udp #steam
+            - 2304:2304/udp #game+2
+            - 5800:5800/tcp #vnc-http
+            - 5890:5900/tcp #vnc
+            - 36533:36533/tcp #?
+        volumes:
+            - ./serverDZ.cfg:/opt/dayzserver/serverDZ.cfg
+        environment:
+            DAYZSERVER_CLI_PORT: "2302"
+            DAYZSERVER_CLI_CONFIG: serverDZ.cfg
+            DAYZSERVER_CLI_ADMINLOG: "true"
+            DAYZSERVER_CLI_NETLOG: "true"
+            DAYZSERVER_CLI_DOLOGS: "true"
+            DAYZSERVER_CLI_CPU_COUNT: "6"

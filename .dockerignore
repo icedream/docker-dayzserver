@@ -3,4 +3,5 @@ mpmissions/*/storage_*
 log/
 Dockerfile*
 .docker*
+docker-compose*.yml
 *.cfg
