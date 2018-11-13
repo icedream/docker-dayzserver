@@ -7,7 +7,8 @@ then
 	cp -vr /opt/dayzserver/mpmissions.template "${HOME}/mpmissions"
 fi
 
-WINE_DEBUG=-all WINEDLLOVERRIDES="mscoree=,mshtml=" DISPLAY="" wineboot -eu
+# Configure wine non-interactively
+WINEDLLOVERRIDES="mscoree,mshtml=" wineboot -eu
 
 # Disable crash dialog
 wine regedit /disable_crash_dialog.reg
