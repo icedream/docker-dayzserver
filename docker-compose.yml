@@ -12,7 +12,7 @@ services:
             - 5890:5900/tcp #vnc
             - 36533:36533/tcp #?
         volumes:
-            - ./serverDZ.cfg:/opt/dayzserver/serverDZ.cfg
+            - ./docker/config/serverDZ.cfg:/config/serverDZ.cfg:ro
         environment:
             DAYZSERVER_CLI_PORT: "2302"
             DAYZSERVER_CLI_CONFIG: serverDZ.cfg

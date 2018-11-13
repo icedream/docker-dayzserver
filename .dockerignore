@@ -5,3 +5,4 @@ Dockerfile*
 .docker*
 docker-compose*.yml
 *.cfg
+/docker/config/

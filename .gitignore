@@ -23,3 +23,7 @@ eula.txt
 *.exe
 *.gproj
 dayzsetting.xml
+
+# Config folder for test docker-compose stack
+/docker/config/*
+!/docker/config/*.cfg
