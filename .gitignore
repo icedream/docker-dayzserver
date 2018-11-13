@@ -1,3 +1,25 @@
-_CommonRedist/
+# DayZ server instance files
 mpmissions/*/storage_*
 log/
+
+# DayZ server files
+_CommonRedist/
+addons/
+battleye/
+dll/
+docs/
+dta/
+keys/
+mpmissions/
+steamapps/
+eula.txt
+*.acf
+*.vdf
+*.bikey
+*.bisign
+*.cfg
+*.pbo
+*.dll
+*.exe
+*.gproj
+dayzsetting.xml
