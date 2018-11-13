@@ -9,6 +9,10 @@ fi
 
 WINE_DEBUG=-all WINEDLLOVERRIDES="mscoree=,mshtml=" DISPLAY="" wineboot -eu
 
+# Disable crash dialog
+wine regedit /disable_crash_dialog.reg
+wineserver -w
+
 # parse DAYZSERVER_CLI_* variables into -name=value arguments
 SERVER_ARGS=()
 while IFS='=' read -r name value
