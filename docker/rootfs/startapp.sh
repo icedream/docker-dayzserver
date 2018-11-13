@@ -2,6 +2,7 @@
 
 export HOME=/config
 
+# Initialize missions directory with template if there is none yet
 if [ ! -d "${HOME}/mpmissions" ]
 then
 	cp -vr /opt/dayzserver/mpmissions.template "${HOME}/mpmissions"
@@ -14,7 +15,7 @@ WINEDLLOVERRIDES="mscoree,mshtml=" wineboot -eu
 wine regedit /disable_crash_dialog.reg
 wineserver -w
 
-# parse DAYZSERVER_CLI_* variables into -name=value arguments
+# Parse DAYZSERVER_CLI_* variables into -name=value arguments
 SERVER_ARGS=()
 while IFS='=' read -r name value
 do
