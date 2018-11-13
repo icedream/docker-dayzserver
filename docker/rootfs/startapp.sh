@@ -1,5 +1,36 @@
 #!/bin/bash -ex
 
+# Resolve a path to an absolute path in a way that it can be used inside Wine apps
+resolve_path_for_wine() {
+	# Is this already a wine-compatible path?
+	if [[ "$value" =~ ^[A-Za-z]: ]]
+	then
+		printf '%s' "$value"
+		return 0
+	fi
+
+	# Replace \ with /
+	value="${value//\\/\/}"
+
+	# Get absolute UNIX path
+	value="$(readlink -f "$1")"
+	if [ -z "${value}" ]
+	then
+		# That file does not exist!
+		echo "Could not resolve path: ${1}" >&2
+		return 1
+	fi
+
+	# Replace / with \
+	value="${value//\//\\}"
+
+	# Prepend Z: drive location
+	value="Z:${value}"
+
+	printf '%s' "$value"
+	return 0
+}
+
 export HOME=/config
 
 # Initialize missions directory with template if there is none yet
@@ -23,6 +54,12 @@ SERVER_ARGS=()
 while IFS='=' read -r name value
 do
 	name="${name/DAYZSERVER_CLI_/}"
+	case "${name}" in
+		CONFIG)
+			# make absolute path that is valid in Wine
+			value="$(resolve_path_for_wine "${value}")"
+			;;
+	esac
 	name="$(tr '[[:upper:]]' '[[:lower:]]' <<< "${name}" | sed -r 's/(_)(([^_])([^_]*))?/\U\3\L\4/g')"
 	case "${value}" in
 		true|yes)
