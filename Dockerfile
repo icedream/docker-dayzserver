@@ -8,7 +8,7 @@ RUN \
 	&& apt-get -y install gnupg2 apt-transport-https \
 	&& apt-key add /wine-builds.key \
 	&& rm /wine-builds.key
-	
+
 RUN \
 	export DEBIAN_FRONTEND=noninteractive \
 	&& dpkg --add-architecture i386 \
@@ -20,7 +20,7 @@ COPY . /opt/dayzserver/
 
 # RUN useradd -k /var/empty -G tty -m -N -r dayzserver
 
-COPY docker/rootfs/ /
+RUN cp -va /opt/dayzserver/docker/rootfs/* / && rm -r /opt/dayzserver/docker
 ADD https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 /usr/local/bin/gosu
 RUN chmod -v a+x /usr/local/bin/* /*.sh
 RUN mv -v /opt/dayzserver/mpmissions /opt/dayzserver/mpmissions.template && ln -s /config/mpmissions /opt/dayzserver/mpmissions
