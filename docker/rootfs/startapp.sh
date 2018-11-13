@@ -15,6 +15,9 @@ WINEDLLOVERRIDES="mscoree,mshtml=" wineboot -eu
 wine regedit /disable_crash_dialog.reg
 wineserver -w
 
+# Switch to config directory for predictable path resolving
+cd "${HOME}"
+
 # Parse DAYZSERVER_CLI_* variables into -name=value arguments
 SERVER_ARGS=()
 while IFS='=' read -r name value
