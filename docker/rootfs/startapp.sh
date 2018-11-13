@@ -16,7 +16,7 @@ do
 	name="${name/DAYZSERVER_CLI_/}"
 	name="$(tr '[[:upper:]]' '[[:lower:]]' <<< "${name}" | sed -r 's/(_)(([^_])([^_]*))?/\U\3\L\4/g')"
 	case "${value}" in
-		true|yes|1)
+		true|yes)
 			SERVER_ARGS+=("-$name")
 			;;
 		*)
