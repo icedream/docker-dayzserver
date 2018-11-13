@@ -7,7 +7,7 @@ then
 	cp -vr /opt/dayzserver/mpmissions.template "${HOME}/mpmissions"
 fi
 
-WINE_DEBUG=-all WINEDLLOVERRIDES="mscoree=,mshtml=" wineboot -eu
+WINE_DEBUG=-all WINEDLLOVERRIDES="mscoree=,mshtml=" DISPLAY="" wineboot -eu
 
 # parse DAYZSERVER_CLI_* variables into -name=value arguments
 SERVER_ARGS=()
