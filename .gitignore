@@ -27,3 +27,6 @@ dayzsetting.xml
 # Config folder for test docker-compose stack
 /docker/config/*
 !/docker/config/*.cfg
+
+# Login credentials for building Docker image
+/userdata.tar
