@@ -50,6 +50,7 @@ COPY --from=0 /opt/dayzserver/ /opt/dayzserver/
 
 # RUN useradd -k /var/empty -G tty -m -N -r dayzserver
 
+COPY ./docker/rootfs/ /opt/dayzserver/docker/rootfs/
 RUN cp -va /opt/dayzserver/docker/rootfs/* / && rm -r /opt/dayzserver/docker
 ADD https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 /usr/local/bin/gosu
 RUN chmod -v a+x /usr/local/bin/* /*.sh
